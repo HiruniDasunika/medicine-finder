@@ -1,2 +1,4 @@
-package com.medicinefinder.medicinefinder.controller;public class DrugController {
+package com.medicinefinder.medicinefinder.controller;
+
+public class DrugController {
 }
