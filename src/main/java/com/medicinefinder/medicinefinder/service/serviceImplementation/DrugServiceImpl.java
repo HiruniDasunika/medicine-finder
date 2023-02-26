@@ -4,7 +4,9 @@ import com.medicinefinder.medicinefinder.entity.Drug;
 import com.medicinefinder.medicinefinder.repository.DrugRepository;
 import com.medicinefinder.medicinefinder.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+
 
 @Service(value = "drugService")
 public class DrugServiceImpl implements DrugService {
@@ -18,6 +20,6 @@ public class DrugServiceImpl implements DrugService {
 
     @Override
     public Drug getDrugById(int id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow();
     }
 }
