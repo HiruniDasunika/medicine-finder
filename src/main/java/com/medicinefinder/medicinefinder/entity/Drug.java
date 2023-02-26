@@ -18,7 +18,7 @@ public class Drug {
     private int id;
 
     @Column(name = "drug_name")
-    private String drugName;
+    private String name;
 
     @Column(name = "drug_brand")
     private String drugBrand;

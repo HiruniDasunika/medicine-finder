@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service(value = "drugService")
 public class DrugServiceImpl implements DrugService {
@@ -22,4 +24,17 @@ public class DrugServiceImpl implements DrugService {
     public Drug getDrugById(int id) {
         return repository.findById(id).orElseThrow();
     }
+
+    public List<Drug> getDrugs() {
+        return repository.findAll();
+    }
+
+    public Drug getDrugByName(String drug_name) {
+        return repository.findByName(drug_name);
+    }
+
+
+
+
+
 }
