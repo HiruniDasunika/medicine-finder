@@ -7,6 +7,7 @@ import com.medicinefinder.medicinefinder.service.serviceImplementation.DrugServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,26 +39,32 @@ private DrugServiceImpl drugService;
         return response;
     }
 
-//    @GetMapping("/drugs")
-//    public Map<String, Object> viewAllDrugs() {
-//        Map<String, Object> response = new HashMap<>();
-//
-//        try {
-//            List<Drug> drug = drugService.getDrugs();
-////            Drug drug = new Drug(1,"Panadol","panadol",0.1,true);
-//            DrugResponseDto drugResponse = new DrugResponseDto();
-//            drugResponse.setName(drug.getDrugName());
-//            drugResponse.setDrugWeight(drug.getDrugWeight());
-//            drugResponse.setDrugBrand(drug.getDrugBrand());
-//            response.put("STATUS", "SUCCESS");
-//            response.put("DATA", List<drugResponse>);
-//        } catch (Exception ex) {
-//            response.put("STATUS", "FAILED");
-//            response.put("MESSAGE", "Oops FAILED " + ex.getMessage());
-//        }
-//
-//        return response;
-//    }
+    @GetMapping("/drugs")
+    public Map<String, Object> viewAllDrugs() {
+        Map<String, Object> responseData = new HashMap<>();
+
+        try {
+            List<Drug> drugs = drugService.getDrugs();
+
+            List<DrugResponseDto> drugResponses = new ArrayList<>();
+            for(Drug drug_: drugs) {
+                DrugResponseDto drugResponse = new DrugResponseDto();
+                drugResponse.setName(drug_.getName());
+                drugResponse.setDrugBrand(drug_.getDrugBrand());
+                drugResponse.setDrugWeight(drug_.getDrugWeight());
+                // Add to array list
+                drugResponses.add(drugResponse);
+            }
+
+            responseData.put("STATUS", "SUCCESS");
+            responseData.put("DATA", drugResponses);
+        } catch (Exception ex) {
+            responseData.put("STATUS", "FAILED");
+            responseData.put("MESSAGE", "Oops FAILED " + ex.getMessage());
+        }
+
+        return responseData;
+    }
 
     @GetMapping("/drug/{name}")
     public Map<String, Object> findDrugByNamee(@PathVariable String name) {
